@@ -11,8 +11,11 @@ using json = nlohmann::json;
 using namespace Dao;
 
 int main() {
-    fprintf(stdout, "Sleeping for 3 seconds...\n");
-    usleep(3000000);
+    const auto* use_dockerized_postgres = std::getenv("USE_DOCKERIZED_POSTGRES");
+    if (use_dockerized_postgres) {
+        fprintf(stdout, "Sleeping for 3 seconds...\n");
+        usleep(3000000);
+    } 
 
     const auto* psql_conn_str = std::getenv("POSTGRES_CONNECTION_STRING");
     // Creating object and calling parameterized constructor
